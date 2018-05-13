@@ -21,7 +21,7 @@ import withOrientation from '../withOrientation';
 import { NavigationProvider } from '../NavigationContext';
 
 import TransitionConfigs from './StackViewTransitionConfigs';
-import * as ReactNativeFeatures from '../../utils/ReactNativeFeatures';
+import { supportsImprovedSpringAnimation } from '../../utils/ReactNativeFeatures';
 
 const emptyFunction = () => {};
 
@@ -149,10 +149,7 @@ class StackViewLayout extends React.Component {
   }
 
   _reset(resetToIndex, duration) {
-    if (
-      Platform.OS === 'ios' &&
-      ReactNativeFeatures.supportsImprovedSpringAnimation()
-    ) {
+    if (Platform.OS === 'ios' && supportsImprovedSpringAnimation()) {
       Animated.spring(this.props.transitionProps.position, {
         toValue: resetToIndex,
         stiffness: 5000,
@@ -192,10 +189,7 @@ class StackViewLayout extends React.Component {
       }
     };
 
-    if (
-      Platform.OS === 'ios' &&
-      ReactNativeFeatures.supportsImprovedSpringAnimation()
-    ) {
+    if (Platform.OS === 'ios' && supportsImprovedSpringAnimation()) {
       Animated.spring(position, {
         toValue,
         stiffness: 5000,
