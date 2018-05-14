@@ -233,7 +233,7 @@ class StackViewLayout extends React.Component {
     },
     onMoveShouldSetPanResponder: (event, gesture) => {
       const {
-        transitionProps: { navigation, position, layout, scene, scenes },
+        transitionProps: { navigation, layout, scene },
         mode,
       } = this.props;
       const { index } = navigation.state;
@@ -397,18 +397,10 @@ class StackViewLayout extends React.Component {
       floatingHeader = this._renderHeader(scene, headerMode);
     }
     const {
-      transitionProps: { navigation, position, layout, scene, scenes },
+      transitionProps: { scene, scenes },
       mode,
     } = this.props;
-    const { index } = navigation.state;
-    const isVertical = mode === 'modal';
     const { options } = scene.descriptor;
-    const gestureDirection = options.gestureDirection;
-
-    const gestureDirectionInverted =
-      typeof gestureDirection === 'string'
-        ? gestureDirection === 'inverted'
-        : I18nManager.isRTL;
 
     const gesturesEnabled =
       typeof options.gesturesEnabled === 'boolean'
